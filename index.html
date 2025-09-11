@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video Library</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <h1 class="text-blue">MyTube</h1>
+    <nav class="flex-row gap-md">
+      <a href="#" class="text-gray">Home</a>
+      <a href="#" class="text-gray">Library</a>
+      <a href="#" class="text-gray">Account</a>
+    </nav>
+  </header>
+
+  <!-- Main Video Grid -->
+  <main class="video-grid">
+    <article class="video-card">
+      <img src="images/sample1.jpg" alt="Video thumbnail">
+      <div class="video-info">
+        <h2 class="video-title">Sample Video Title</h2>
+        <p class="video-meta">1.2M views · 3 days ago</p>
+      </div>
+    </article>
+    <!-- Repeat .video-card as needed -->
+  </main>
+
+  <!-- Shorts Section -->
+  <section class="shorts-section">
+    <h2 class="text-black" style="margin-bottom: var(--spacing-md);">Shorts</h2>
+    <div class="shorts-scroll">
+      <div class="short-card">
+        <img src="images/short1.jpg" alt="Short video">
+      </div>
+      <div class="short-card">
+        <img src="images/short2.jpg" alt="Short video">
+      </div>
+      <!-- Add more short-cards -->
+    </div>
+  </section>
+
+</body>
+</html>
