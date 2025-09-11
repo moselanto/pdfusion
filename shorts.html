@@ -1,57 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>YouTube Shorts Page</title>
-  <link href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Shorts Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="shorts.css">
 </head>
 <body>
-
-  <!-- Top Bar -->
-  <header class="topbar">
-    <h1 class="tab active">Shorts</h1>
-    <h1 class="tab">Videos</h1>
-    <button class="mode-toggle" aria-label="Dark/Light toggle">◐</button>
-  </header>
-
-  <!-- Hero / Banner -->
-  <section class="hero">
-    <img src="images/shorts-banner.png" alt="YouTube Shorts Banner" class="hero-img">
-    <p class="hero-text">Find more shorts here!</p>
-  </section>
-
-  <!-- Shorts Grid -->
-  <main class="shorts-grid">
-    <article class="short-card">
-      <img src="images/short1.jpg" alt="Inline Skating Practice" />
-      <h2>Inline Skating Practice #inlineskating</h2>
-    </article>
-
-    <article class="short-card">
-      <img src="images/short2.jpg" alt="Epic downhill skating fail" />
-      <h2>Epic downhill skating fail at 100km/h</h2>
-    </article>
-
-    <article class="short-card">
-      <img src="images/short3.jpg" alt="Magical Messi Moments" />
-      <h2>Magical Messi Moments with Pepsi!</h2>
-    </article>
-
-    <article class="short-card">
-      <img src="images/short4.jpg" alt="MLB Worst Ways to Lose a Game" />
-      <h2>MLB Worst Ways to Lose a Game</h2>
-    </article>
-  </main>
-
-  <!-- Bottom Navigation -->
-  <nav class="bottom-nav">
-    <a href="#" class="nav-item active">Home</a>
-    <a href="#" class="nav-item">Shorts</a>
-    <a href="#" class="nav-item">Subscriptions</a>
-    <a href="#" class="nav-item">You</a>
-  </nav>
-
+  <div class="shorts-bg">
+    <div class="shorts-title">shorts&nbsp;page</div>
+    <div class="shorts-container">
+      <div class="shorts-header">
+        <div class="shorts-tabs">
+          <div class="tab active">Shorts</div>
+          <div class="tab">Videos</div>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" id="toggle" />
+          <label for="toggle"></label>
+        </div>
+      </div>
+      <div class="shorts-logo-section">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/YouTube_Short_Logo.png/800px-YouTube_Short_Logo.png" alt="Shorts Logo" class="shorts-logo">
+        <span class="shorts-logo-text">Shorts</span>
+      </div>
+      <div class="shorts-find">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="fb-icon">
+        <span>Find more shorts here!</span>
+      </div>
+      <div class="shorts-grid">
+        <div class="shorts-card">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Inline Skating">
+          <div class="card-title">Inline Skating Practice</div>
+        </div>
+        <div class="shorts-card">
+          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Skating Fail">
+          <div class="card-title">Epic newest skating fail at 10AM</div>
+        </div>
+        <div class="shorts-card">
+          <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Magical Moments">
+          <div class="card-title">Magical Moment Moments with Papa</div>
+        </div>
+        <div class="shorts-card">
+          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=400&q=80" alt="Win a Game">
+          <div class="card-title">MLB: Worst Ways to Lose a Game</div>
+        </div>
+      </div>
+      <div class="shorts-navbar">
+        <div class="nav-item active"><span class="icon">&#128717;</span> Home</div>
+        <div class="nav-item"><span class="icon">&#128253;</span> Shorts</div>
+        <div class="nav-item"><span class="icon">&#128228;</span> Subscription</div>
+        <div class="nav-item"><span class="icon">&#128100;</span> You</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
