@@ -1,58 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Shorts Page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="shorts.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Shorts - Responsive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="responsive-styles.css">
 </head>
 <body>
-  <div class="shorts-bg">
-    <div class="shorts-title">shorts&nbsp;page</div>
-    <div class="shorts-container">
-      <div class="shorts-header">
-        <div class="shorts-tabs">
-          <div class="tab active">Shorts</div>
-          <div class="tab">Videos</div>
+    <div class="shorts-page-1">
+        <!-- Mobile Status Bar (hidden on desktop) -->
+        <div class="top-nav-bar-23">
+            <div class="time-31">9:41</div>
+            <div class="battery-icons">
+                <svg class="mobile-signal-30" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M2 14h1v-4H2v4zm3-6h1v6H5V8zm3-4h1v10H8V4zm3-2h1v12h-1V2z"/>
+                </svg>
+                <svg class="wifi-29" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm5.5 12.5L12 11c-1.1 1.1-2.9 1.1-4 0L6.5 12.5c-1.9-1.9-1.9-5.1 0-7L8 7l1.5-1.5c1.9 1.9 1.9 5.1 0 7z"/>
+                </svg>
+                <div class="battery-25">
+                    <svg viewBox="0 0 24 13" width="24" height="13" fill="currentColor">
+                        <rect x="0" y="2" width="20" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+                        <rect x="21" y="4" width="2" height="5" rx="1" fill="currentColor" opacity="0.4"/>
+                        <rect x="2" y="4" width="16" height="5" rx="1" fill="currentColor"/>
+                    </svg>
+                </div>
+            </div>
         </div>
-        <div class="toggle-switch">
-          <input type="checkbox" id="toggle" />
-          <label for="toggle"></label>
+
+        <div class="content-wrapper">
+            <!-- Header Navigation -->
+            <div class="header-nav">
+                <div class="nav-tabs">
+                    <a href="#" class="nav-tab active">Shorts</a>
+                    <a href="#" class="nav-tab inactive">Videos</a>
+                </div>
+                <div class="settings-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- YouTube Shorts Banner -->
+            <div class="youtube-shorts-banner">
+                <div class="youtube-logo">
+                    <svg viewBox="0 0 24 24" width="20" height="14" fill="red">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </div>
+                <div class="shorts-title">Shorts</div>
+            </div>
+
+            <!-- Find More Shorts Section -->
+            <div class="find-more-section">
+                <div class="find-more-text">
+                    <span class="notification-dot"></span>
+                    Find more shorts here!
+                </div>
+
+                <!-- Video Grid -->
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #ffeaa7, #fab1a0);"></div>
+                        <div class="video-info">
+                            <div class="video-title">Inline Skating Practice #inlineskating</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #81ecec, #74b9ff);"></div>
+                        <div class="video-info">
+                            <div class="video-title">Epic downhill skating fail at 100km/h</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #a29bfe, #6c5ce7);"></div>
+                        <div class="video-info">
+                            <div class="video-title">Magical Messi Moments with Pepsi!</div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #fd79a8, #e84393);"></div>
+                        <div class="video-info">
+                            <div class="video-title">MLB Worst Ways to Lose a Game</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="shorts-logo-section">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/YouTube_Short_Logo.png/800px-YouTube_Short_Logo.png" alt="Shorts Logo" class="shorts-logo">
-        <span class="shorts-logo-text">Shorts</span>
-      </div>
-      <div class="shorts-find">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="fb-icon">
-        <span>Find more shorts here!</span>
-      </div>
-      <div class="shorts-grid">
-        <div class="shorts-card">
-          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Inline Skating">
-          <div class="card-title">Inline Skating Practice</div>
+
+        <!-- Bottom Navigation -->
+        <div class="component-38-33">
+            <div class="component-26-34">
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span class="nav-label">Home</span>
+                </a>
+
+                <a href="#" class="nav-item active">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 8v8l5-4-5-4zm9-5H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                    </svg>
+                    <span class="nav-label">Shorts</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <div class="add-button">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.50-.31 2.04-.81l7.05 4.11c-.05.23-.09.46-.09.7 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/>
+                    </svg>
+                    <span class="nav-label">Subscription</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <div class="avatar">A</div>
+                    <span class="nav-label">You</span>
+                </a>
+            </div>
         </div>
-        <div class="shorts-card">
-          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Skating Fail">
-          <div class="card-title">Epic newest skating fail at 10AM</div>
-        </div>
-        <div class="shorts-card">
-          <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Magical Moments">
-          <div class="card-title">Magical Moment Moments with Papa</div>
-        </div>
-        <div class="shorts-card">
-          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=400&q=80" alt="Win a Game">
-          <div class="card-title">MLB: Worst Ways to Lose a Game</div>
-        </div>
-      </div>
-      <div class="shorts-navbar">
-        <div class="nav-item active"><span class="icon">&#128717;</span> Home</div>
-        <div class="nav-item"><span class="icon">&#128253;</span> Shorts</div>
-        <div class="nav-item"><span class="icon">&#128228;</span> Subscription</div>
-        <div class="nav-item"><span class="icon">&#128100;</span> You</div>
-      </div>
     </div>
-  </div>
 </body>
 </html>
