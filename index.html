@@ -26,6 +26,25 @@
       z-index: 1000;
     }
 
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .menu-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: #000;
+    }
+
     .logo {
       display: flex;
       align-items: center;
@@ -83,6 +102,57 @@
       cursor: pointer;
     }
 
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 56px;
+      left: 0;
+      bottom: 0;
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #ddd;
+      padding: 16px 0;
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+      z-index: 999;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 24px;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .sidebar a:hover {
+      background: #f2f2f2;
+    }
+
+    .sidebar a .icon {
+      font-size: 18px;
+      color: #606060;
+    }
+
+    /* Collapsed on mobile */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+      }
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      .content {
+        margin-left: 0 !important;
+      }
+      .categories-wrapper {
+        left: 0 !important;
+      }
+    }
+
     /* Categories row wrapper */
     .categories-wrapper {
       position: sticky;
@@ -105,7 +175,7 @@
       overflow-x: auto;
       white-space: nowrap;
       flex: 1;
-      padding: 0 40px; /* room for arrows */
+      padding: 0 40px;
       scrollbar-width: none;
     }
 
@@ -123,87 +193,18 @@
       transition: background 0.2s, color 0.2s;
     }
 
-    .chip:hover {
-      background: #e5e5e5;
-    }
-
     .chip.active {
       background: #000;
       color: #fff;
     }
 
-    .scroll-btn {
-      position: absolute;
-      top: 56px;
-      height: 48px;
-      width: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 1001;
-      display: none; /* hidden by default */
-      transition: background 0.2s ease;
-    }
-
-    .scroll-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: #000;
-    }
-
-    .scroll-btn:hover {
-      background: rgba(0, 0, 0, 0.05);
-    }
-
-    .scroll-left {
-      left: 240px;
-    }
-
-    .scroll-right {
-      right: 0;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      top: 56px;
-      left: 0;
-      bottom: 0;
-      width: 240px;
-      background: #fff;
-      border-right: 1px solid #ddd;
-      padding: 16px 0;
-      overflow-y: auto;
-    }
-
-    .sidebar a {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 10px 24px;
-      text-decoration: none;
-      color: #333;
-      font-size: 14px;
-    }
-
-    .sidebar a:hover {
-      background: #f2f2f2;
-    }
-
-    .sidebar a .icon {
-      font-size: 18px;
-      color: #606060;
-    }
-
-    /* Main content */
+    /* Content */
     .content {
-      margin-top: 104px; /* 56px topbar + 48px categories */
+      margin-top: 104px;
       margin-left: 240px;
       padding: 20px;
     }
 
-    /* Video Grid */
     .video-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -250,56 +251,24 @@
       font-size: 12px;
       color: #606060;
     }
-
-    /* Shorts section */
-    .shorts {
-      margin-top: 40px;
-    }
-
-    .shorts h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-      font-weight: 500;
-    }
-
-    .shorts-grid {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-    }
-
-    .short-card {
-      width: 150px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .short-thumbnail img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    .short-title {
-      font-size: 13px;
-      margin-top: 6px;
-      color: #000;
-    }
   </style>
 </head>
 <body>
   <!-- Topbar -->
   <div class="topbar">
-    <div class="logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 20">
-        <path fill="#FF0000" d="M88.0,2.5c-0.9-1.7-1.9-2.1-3.9-2.2C80.2,0,70,0,70,0s-10.2,0-14.1,0.3c-2,0.1-3,0.5-3.9,2.2
-        c-0.9,1.7-0.9,5.2-0.9,5.2s0,3.5,0.9,5.2c0.9,1.7,1.9,2.1,3.9,2.2C59.8,15,70,15,70,15s10.2,0,14.1-0.3c2-0.1,3-0.5,3.9-2.2
-        c0.9-1.7,0.9-5.2,0.9-5.2S89,4.2,88.0,2.5z"/>
-        <polygon fill="#FFF" points="60,4.5 60,10.5 65,7.5"/>
-      </svg>
-      <span style="font-weight:bold; font-size:18px; color:#000;">YouTube</span>
+    <div class="nav-left">
+      <button class="menu-btn" id="menuBtn">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+      </button>
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 20">
+          <path fill="#FF0000" d="M88.0,2.5c-0.9-1.7-1.9-2.1-3.9-2.2C80.2,0,70,0,70,0s-10.2,0-14.1,0.3c-2,0.1-3,0.5-3.9,2.2
+          c-0.9,1.7-0.9,5.2-0.9,5.2s0,3.5,0.9,5.2c0.9,1.7,1.9,2.1,3.9,2.2C59.8,15,70,15,70,15s10.2,0,14.1-0.3c2-0.1,3-0.5,3.9-2.2
+          c0.9-1.7,0.9-5.2,0.9-5.2S89,4.2,88.0,2.5z"/>
+          <polygon fill="#FFF" points="60,4.5 60,10.5 65,7.5"/>
+        </svg>
+        <span style="font-weight:bold; font-size:18px; color:#000;">YouTube</span>
+      </div>
     </div>
 
     <div class="search">
@@ -308,48 +277,12 @@
     </div>
 
     <div class="user-actions">
-      <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zM5 20h14v2H5z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M12 24c1.1 0 2-.9 2-2h-4a2 
-      2 0 002 2zm6-6V11c0-3.07-1.63-5.64-4.5-6.32V4a1.5 
-      1.5 0 00-3 0v.68C7.63 5.36 6 7.92 6 
-      11v7l-2 2v1h16v-1l-2-2z"/></svg>
       <img class="profile" src="https://i.pravatar.cc/40?img=20" alt="Profile">
     </div>
   </div>
 
-  <!-- Categories Row with Arrows -->
-  <div class="categories-wrapper">
-    <div class="scroll-btn scroll-left" id="scrollLeft" onclick="scrollCategories(-200)">
-      <svg viewBox="0 0 24 24"><path d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
-    </div>
-    <div class="categories" id="categories">
-      <div class="chip active">All</div>
-      <div class="chip">Music</div>
-      <div class="chip">Afrobeat</div>
-      <div class="chip">African Music</div>
-      <div class="chip">Rhythms</div>
-      <div class="chip">Playlists</div>
-      <div class="chip">Mixes</div>
-      <div class="chip">Live</div>
-      <div class="chip">Dr. Dre</div>
-      <div class="chip">Web pages</div>
-      <div class="chip">Contemporary Worship Music</div>
-      <div class="chip">Lessons</div>
-      <div class="chip">Comedy</div>
-      <div class="chip">Animated films</div>
-      <div class="chip">Recently uploaded</div>
-      <div class="chip">Watched</div>
-      <div class="chip">New to you</div>
-    </div>
-    <div class="scroll-btn scroll-right" id="scrollRight" onclick="scrollCategories(200)">
-      <svg viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-    </div>
-  </div>
-
   <!-- Sidebar -->
-  <div class="sidebar">
-    <a href="#"><span class="icon">🏠</span> Home</a>
+  <div class="sidebar" id="sidebar">
     <a href="#"><span class="icon">🎬</span> Shorts</a>
     <a href="#"><span class="icon">📺</span> Subscriptions</a>
     <a href="#"><span class="icon">📚</span> Library</a>
@@ -357,7 +290,20 @@
     <a href="#"><span class="icon">👍</span> Liked Videos</a>
   </div>
 
-  <!-- Main Content -->
+  <!-- Categories -->
+  <div class="categories-wrapper">
+    <div class="categories">
+      <div class="chip active">All</div>
+      <div class="chip">Music</div>
+      <div class="chip">Comedy</div>
+      <div class="chip">Live</div>
+      <div class="chip">Playlists</div>
+      <div class="chip">Recently uploaded</div>
+      <div class="chip">New to you</div>
+    </div>
+  </div>
+
+  <!-- Content -->
   <div class="content">
     <div class="video-grid">
       <div class="video-card">
@@ -378,74 +324,11 @@
   </div>
 
   <script>
-    const categories = document.getElementById('categories');
-    const scrollLeftBtn = document.getElementById('scrollLeft');
-    const scrollRightBtn = document.getElementById('scrollRight');
-    const chips = categories.querySelectorAll('.chip');
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
 
-    function updateScrollButtons() {
-      scrollLeftBtn.style.display = categories.scrollLeft > 0 ? 'flex' : 'none';
-      scrollRightBtn.style.display =
-        categories.scrollWidth > categories.clientWidth + categories.scrollLeft
-          ? 'flex'
-          : 'none';
-    }
-
-    function scrollCategories(amount) {
-      categories.scrollBy({ left: amount, behavior: 'smooth' });
-    }
-
-    function updateActiveChip() {
-      const center = categories.scrollLeft + categories.clientWidth / 2;
-      let closestChip = null;
-      let closestDist = Infinity;
-
-      chips.forEach(chip => {
-        const rect = chip.getBoundingClientRect();
-        const chipCenter = rect.left + rect.width / 2 + categories.scrollLeft - categories.getBoundingClientRect().left;
-        const dist = Math.abs(chipCenter - center);
-        if (dist < closestDist) {
-          closestDist = dist;
-          closestChip = chip;
-        }
-      });
-
-      chips.forEach(chip => chip.classList.remove('active'));
-      if (closestChip) closestChip.classList.add('active');
-    }
-
-    // Auto-hide buttons + update active chip
-    categories.addEventListener('scroll', () => {
-      updateScrollButtons();
-      updateActiveChip();
-    });
-    window.addEventListener('resize', () => {
-      updateScrollButtons();
-      updateActiveChip();
-    });
-    window.addEventListener('load', () => {
-      updateScrollButtons();
-      updateActiveChip();
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        scrollCategories(-200);
-      } else if (e.key === 'ArrowRight') {
-        scrollCategories(200);
-      }
-    });
-
-    // Click to activate + center chip
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        const chipCenter = chip.offsetLeft + chip.offsetWidth / 2;
-        const scrollTo = chipCenter - categories.clientWidth / 2;
-        categories.scrollTo({ left: scrollTo, behavior: 'smooth' });
-      });
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
     });
   </script>
 </body>
