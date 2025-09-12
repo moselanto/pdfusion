@@ -83,9 +83,9 @@
       cursor: pointer;
     }
 
-    /* Categories row */
-    .categories {
-      position: fixed;
+    /* Categories row wrapper */
+    .categories-wrapper {
+      position: sticky;
       top: 56px;
       left: 240px;
       right: 0;
@@ -94,11 +94,22 @@
       border-bottom: 1px solid #ddd;
       display: flex;
       align-items: center;
-      padding: 0 16px;
+      z-index: 900;
+    }
+
+    .categories {
+      display: flex;
+      align-items: center;
       gap: 12px;
       overflow-x: auto;
       white-space: nowrap;
-      z-index: 999;
+      flex: 1;
+      padding: 0 40px; /* room for arrows */
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
     }
 
     .chip {
@@ -117,6 +128,34 @@
     .chip.active {
       background: #000;
       color: #fff;
+    }
+
+    .scroll-btn {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to right, rgba(255,255,255,0.9), #fff);
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .scroll-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #000;
+    }
+
+    .scroll-left {
+      left: 240px;
+      background: linear-gradient(to left, rgba(255,255,255,0.9), #fff);
+    }
+
+    .scroll-right {
+      right: 0;
     }
 
     /* Sidebar */
@@ -278,25 +317,33 @@
     </div>
   </div>
 
-  <!-- Categories Row -->
-  <div class="categories">
-    <div class="chip active">All</div>
-    <div class="chip">Music</div>
-    <div class="chip">Afrobeat</div>
-    <div class="chip">African Music</div>
-    <div class="chip">Rhythms</div>
-    <div class="chip">Playlists</div>
-    <div class="chip">Mixes</div>
-    <div class="chip">Live</div>
-    <div class="chip">Dr. Dre</div>
-    <div class="chip">Web pages</div>
-    <div class="chip">Contemporary Worship Music</div>
-    <div class="chip">Lessons</div>
-    <div class="chip">Comedy</div>
-    <div class="chip">Animated films</div>
-    <div class="chip">Recently uploaded</div>
-    <div class="chip">Watched</div>
-    <div class="chip">New to you</div>
+  <!-- Categories Row with Arrows -->
+  <div class="categories-wrapper">
+    <div class="scroll-btn scroll-left" onclick="scrollCategories(-200)">
+      <svg viewBox="0 0 24 24"><path d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
+    </div>
+    <div class="categories" id="categories">
+      <div class="chip active">All</div>
+      <div class="chip">Music</div>
+      <div class="chip">Afrobeat</div>
+      <div class="chip">African Music</div>
+      <div class="chip">Rhythms</div>
+      <div class="chip">Playlists</div>
+      <div class="chip">Mixes</div>
+      <div class="chip">Live</div>
+      <div class="chip">Dr. Dre</div>
+      <div class="chip">Web pages</div>
+      <div class="chip">Contemporary Worship Music</div>
+      <div class="chip">Lessons</div>
+      <div class="chip">Comedy</div>
+      <div class="chip">Animated films</div>
+      <div class="chip">Recently uploaded</div>
+      <div class="chip">Watched</div>
+      <div class="chip">New to you</div>
+    </div>
+    <div class="scroll-btn scroll-right" onclick="scrollCategories(200)">
+      <svg viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+    </div>
   </div>
 
   <!-- Sidebar -->
@@ -311,8 +358,8 @@
 
   <!-- Main Content -->
   <div class="content">
-    <!-- Video Grid -->
     <div class="video-grid">
+      <!-- Sample video -->
       <div class="video-card">
         <div class="video-thumbnail">
           <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Video 1">
@@ -327,80 +374,14 @@
           </div>
         </div>
       </div>
-      <div class="video-card">
-        <div class="video-thumbnail">
-          <img src="https://img.youtube.com/vi/9bZkp7q19f0/hqdefault.jpg" alt="Video 2">
-        </div>
-        <div class="video-info">
-          <div class="channel-icon">
-            <img src="https://i.pravatar.cc/36?img=25" alt="Channel Icon">
-          </div>
-          <div class="video-text">
-            <div class="video-title">Top 10 Travel Destinations 2025</div>
-            <div class="video-meta">GlobeTrotter • 845K views • 1 week ago</div>
-          </div>
-        </div>
-      </div>
-      <div class="video-card">
-        <div class="video-thumbnail">
-          <img src="https://img.youtube.com/vi/J---aiyznGQ/hqdefault.jpg" alt="Video 3">
-        </div>
-        <div class="video-info">
-          <div class="channel-icon">
-            <img src="https://i.pravatar.cc/36?img=31" alt="Channel Icon">
-          </div>
-          <div class="video-text">
-            <div class="video-title">Funny Cats Compilation</div>
-            <div class="video-meta">CatTube • 3.4M views • 3 weeks ago</div>
-          </div>
-        </div>
-      </div>
-      <div class="video-card">
-        <div class="video-thumbnail">
-          <img src="https://img.youtube.com/vi/W6NZfCO5SIk/hqdefault.jpg" alt="Video 4">
-        </div>
-        <div class="video-info">
-          <div class="channel-icon">
-            <img src="https://i.pravatar.cc/36?img=5" alt="Channel Icon">
-          </div>
-          <div class="video-text">
-            <div class="video-title">Learn JavaScript in 10 Minutes</div>
-            <div class="video-meta">DevHub • 980K views • 1 month ago</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Shorts Section -->
-    <div class="shorts">
-      <h2>Shorts</h2>
-      <div class="shorts-grid">
-        <div class="short-card">
-          <div class="short-thumbnail">
-            <img src="https://img.youtube.com/vi/3fumBcKC6RE/hqdefault.jpg" alt="Short 1">
-          </div>
-          <div class="short-title">Amazing Trick Shot!</div>
-        </div>
-        <div class="short-card">
-          <div class="short-thumbnail">
-            <img src="https://img.youtube.com/vi/lXMskKTw3Bc/hqdefault.jpg" alt="Short 2">
-          </div>
-          <div class="short-title">Quick Cooking Hack</div>
-        </div>
-        <div class="short-card">
-          <div class="short-thumbnail">
-            <img src="https://img.youtube.com/vi/tVj0ZTS4WF4/hqdefault.jpg" alt="Short 3">
-          </div>
-          <div class="short-title">Dance Challenge</div>
-        </div>
-        <div class="short-card">
-          <div class="short-thumbnail">
-            <img src="https://img.youtube.com/vi/ZbZSe6N_BXs/hqdefault.jpg" alt="Short 4">
-          </div>
-          <div class="short-title">Cute Puppy Playing</div>
-        </div>
-      </div>
+      <!-- Add more videos here -->
     </div>
   </div>
+
+  <script>
+    function scrollCategories(amount) {
+      document.getElementById('categories').scrollBy({ left: amount, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
