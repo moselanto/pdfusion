@@ -393,9 +393,19 @@
       categories.scrollBy({ left: amount, behavior: 'smooth' });
     }
 
+    // Auto-hide buttons on scroll/resize/load
     categories.addEventListener('scroll', updateScrollButtons);
     window.addEventListener('resize', updateScrollButtons);
     window.addEventListener('load', updateScrollButtons);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        scrollCategories(-200);
+      } else if (e.key === 'ArrowRight') {
+        scrollCategories(200);
+      }
+    });
   </script>
 </body>
 </html>
