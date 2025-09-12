@@ -136,7 +136,6 @@
       color: #606060;
     }
 
-    /* Collapsed on mobile */
     @media (max-width: 768px) {
       .sidebar {
         transform: translateX(-100%);
@@ -196,6 +195,38 @@
     .chip.active {
       background: #000;
       color: #fff;
+    }
+
+    .scroll-btn {
+      position: absolute;
+      top: 56px;
+      height: 48px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1001;
+      display: none;
+      transition: background 0.2s ease;
+    }
+
+    .scroll-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #000;
+    }
+
+    .scroll-btn:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .scroll-left {
+      left: 240px;
+    }
+
+    .scroll-right {
+      right: 0;
     }
 
     /* Content */
@@ -277,6 +308,13 @@
     </div>
 
     <div class="user-actions">
+      <!-- Notification bell -->
+      <svg viewBox="0 0 24 24">
+        <path d="M12 24c1.1 0 2-.9 2-2h-4a2 
+        2 0 002 2zm6-6V11c0-3.07-1.63-5.64-4.5-6.32V4a1.5 
+        1.5 0 00-3 0v.68C7.63 5.36 6 7.92 6 
+        11v7l-2 2v1h16v-1l-2-2z"/>
+      </svg>
       <img class="profile" src="https://i.pravatar.cc/40?img=20" alt="Profile">
     </div>
   </div>
@@ -292,14 +330,30 @@
 
   <!-- Categories -->
   <div class="categories-wrapper">
-    <div class="categories">
+    <div class="scroll-btn scroll-left" id="scrollLeft">
+      <svg viewBox="0 0 24 24"><path d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
+    </div>
+    <div class="categories" id="categories">
       <div class="chip active">All</div>
       <div class="chip">Music</div>
-      <div class="chip">Comedy</div>
-      <div class="chip">Live</div>
+      <div class="chip">African Music</div>
       <div class="chip">Playlists</div>
+      <div class="chip">Mixes</div>
+      <div class="chip">Riddim</div>
+      <div class="chip">Live</div>
+      <div class="chip">Podcasts</div>
+      <div class="chip">Dr. Dre</div>
+      <div class="chip">Web pages</div>
+      <div class="chip">New-Age Music</div>
+      <div class="chip">Contemporary Worship Music</div>
+      <div class="chip">Comedy</div>
+      <div class="chip">Animated films</div>
       <div class="chip">Recently uploaded</div>
+      <div class="chip">Watched</div>
       <div class="chip">New to you</div>
+    </div>
+    <div class="scroll-btn scroll-right" id="scrollRight">
+      <svg viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
     </div>
   </div>
 
@@ -326,10 +380,32 @@
   <script>
     const menuBtn = document.getElementById('menuBtn');
     const sidebar = document.getElementById('sidebar');
+    const categories = document.getElementById('categories');
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+    const scrollRightBtn = document.getElementById('scrollRight');
 
     menuBtn.addEventListener('click', () => {
       sidebar.classList.toggle('active');
     });
+
+    function updateScrollButtons() {
+      scrollLeftBtn.style.display = categories.scrollLeft > 0 ? 'flex' : 'none';
+      scrollRightBtn.style.display =
+        categories.scrollWidth > categories.clientWidth + categories.scrollLeft
+          ? 'flex'
+          : 'none';
+    }
+
+    function scrollCategories(amount) {
+      categories.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+
+    categories.addEventListener('scroll', updateScrollButtons);
+    window.addEventListener('resize', updateScrollButtons);
+    window.addEventListener('load', updateScrollButtons);
+
+    scrollLeftBtn.addEventListener('click', () => scrollCategories(-200));
+    scrollRightBtn.addEventListener('click', () => scrollCategories(200));
   </script>
 </body>
 </html>
