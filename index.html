@@ -62,10 +62,61 @@
 
     .user-actions {
       display: flex;
-      gap: 16px;
+      gap: 20px;
       align-items: center;
       font-size: 18px;
       color: #555;
+    }
+
+    .user-actions svg {
+      width: 24px;
+      height: 24px;
+      fill: #606060;
+      cursor: pointer;
+    }
+
+    .profile {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    /* Categories row */
+    .categories {
+      position: fixed;
+      top: 56px;
+      left: 240px;
+      right: 0;
+      height: 48px;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+      overflow-x: auto;
+      white-space: nowrap;
+      z-index: 999;
+    }
+
+    .chip {
+      padding: 6px 12px;
+      font-size: 14px;
+      border-radius: 16px;
+      background: #f2f2f2;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .chip:hover {
+      background: #e5e5e5;
+    }
+
+    .chip.active {
+      background: #000;
+      color: #fff;
     }
 
     /* Sidebar */
@@ -102,7 +153,7 @@
 
     /* Main content */
     .content {
-      margin-top: 56px;
+      margin-top: 104px; /* 56px topbar + 48px categories */
       margin-left: 240px;
       padding: 20px;
     }
@@ -199,18 +250,53 @@
     <div class="logo">
       <!-- Official YouTube SVG Logo -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 20">
-        <path fill="#FF0000" d="M88.0,2.5c-0.9-1.7-1.9-2.1-3.9-2.2C80.2,0,70,0,70,0s-10.2,0-14.1,0.3c-2,0.1-3,0.5-3.9,2.2 c-0.9,1.7-0.9,5.2-0.9,5.2s0,3.5,0.9,5.2c0.9,1.7,1.9,2.1,3.9,2.2C59.8,15,70,15,70,15s10.2,0,14.1-0.3c2-0.1,3-0.5,3.9-2.2 c0.9-1.7,0.9-5.2,0.9-5.2S89,4.2,88.0,2.5z"/>
+        <path fill="#FF0000" d="M88.0,2.5c-0.9-1.7-1.9-2.1-3.9-2.2C80.2,0,70,0,70,0s-10.2,0-14.1,0.3c-2,0.1-3,0.5-3.9,2.2
+        c-0.9,1.7-0.9,5.2-0.9,5.2s0,3.5,0.9,5.2c0.9,1.7,1.9,2.1,3.9,2.2C59.8,15,70,15,70,15s10.2,0,14.1-0.3c2-0.1,3-0.5,3.9-2.2
+        c0.9-1.7,0.9-5.2,0.9-5.2S89,4.2,88.0,2.5z"/>
         <polygon fill="#FFF" points="60,4.5 60,10.5 65,7.5"/>
       </svg>
       <span style="font-weight:bold; font-size:18px; color:#000;">YouTube</span>
     </div>
+
     <div class="search">
       <input type="text" placeholder="Search">
       <button>🔍</button>
     </div>
+
     <div class="user-actions">
-      ⬆️ 📺 😀
+      <!-- Upload Icon -->
+      <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zM5 20h14v2H5z"/></svg>
+      <!-- Apps Icon -->
+      <svg viewBox="0 0 24 24"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg>
+      <!-- Notifications Icon -->
+      <svg viewBox="0 0 24 24"><path d="M12 24c1.1 0 2-.9 2-2h-4a2 
+      2 0 002 2zm6-6V11c0-3.07-1.63-5.64-4.5-6.32V4a1.5 
+      1.5 0 00-3 0v.68C7.63 5.36 6 7.92 6 
+      11v7l-2 2v1h16v-1l-2-2z"/></svg>
+      <!-- Profile Icon -->
+      <img class="profile" src="https://i.pravatar.cc/40?img=20" alt="Profile">
     </div>
+  </div>
+
+  <!-- Categories Row -->
+  <div class="categories">
+    <div class="chip active">All</div>
+    <div class="chip">Music</div>
+    <div class="chip">Afrobeat</div>
+    <div class="chip">African Music</div>
+    <div class="chip">Rhythms</div>
+    <div class="chip">Playlists</div>
+    <div class="chip">Mixes</div>
+    <div class="chip">Live</div>
+    <div class="chip">Dr. Dre</div>
+    <div class="chip">Web pages</div>
+    <div class="chip">Contemporary Worship Music</div>
+    <div class="chip">Lessons</div>
+    <div class="chip">Comedy</div>
+    <div class="chip">Animated films</div>
+    <div class="chip">Recently uploaded</div>
+    <div class="chip">Watched</div>
+    <div class="chip">New to you</div>
   </div>
 
   <!-- Sidebar -->
