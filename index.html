@@ -120,6 +120,7 @@
       background: #f2f2f2;
       cursor: pointer;
       flex-shrink: 0;
+      transition: background 0.2s, color 0.2s;
     }
 
     .chip:hover {
@@ -380,6 +381,7 @@
     const categories = document.getElementById('categories');
     const scrollLeftBtn = document.getElementById('scrollLeft');
     const scrollRightBtn = document.getElementById('scrollRight');
+    const chips = categories.querySelectorAll('.chip');
 
     function updateScrollButtons() {
       scrollLeftBtn.style.display = categories.scrollLeft > 0 ? 'flex' : 'none';
@@ -393,10 +395,38 @@
       categories.scrollBy({ left: amount, behavior: 'smooth' });
     }
 
-    // Auto-hide buttons on scroll/resize/load
-    categories.addEventListener('scroll', updateScrollButtons);
-    window.addEventListener('resize', updateScrollButtons);
-    window.addEventListener('load', updateScrollButtons);
+    function updateActiveChip() {
+      const center = categories.scrollLeft + categories.clientWidth / 2;
+      let closestChip = null;
+      let closestDist = Infinity;
+
+      chips.forEach(chip => {
+        const rect = chip.getBoundingClientRect();
+        const chipCenter = rect.left + rect.width / 2 + categories.scrollLeft - categories.getBoundingClientRect().left;
+        const dist = Math.abs(chipCenter - center);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestChip = chip;
+        }
+      });
+
+      chips.forEach(chip => chip.classList.remove('active'));
+      if (closestChip) closestChip.classList.add('active');
+    }
+
+    // Auto-hide buttons + update active chip
+    categories.addEventListener('scroll', () => {
+      updateScrollButtons();
+      updateActiveChip();
+    });
+    window.addEventListener('resize', () => {
+      updateScrollButtons();
+      updateActiveChip();
+    });
+    window.addEventListener('load', () => {
+      updateScrollButtons();
+      updateActiveChip();
+    });
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
