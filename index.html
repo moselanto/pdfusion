@@ -436,6 +436,17 @@
         scrollCategories(200);
       }
     });
+
+    // Click to activate + center chip
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const chipCenter = chip.offsetLeft + chip.offsetWidth / 2;
+        const scrollTo = chipCenter - categories.clientWidth / 2;
+        categories.scrollTo({ left: scrollTo, behavior: 'smooth' });
+      });
+    });
   </script>
 </body>
 </html>
