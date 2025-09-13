@@ -6,13 +6,31 @@ const searchBtn = document.querySelector(".search button");
 searchBtn.addEventListener("click", (e) => {
   if (window.innerWidth <= 480) {
     e.preventDefault();
-    // Use a class for toggling instead of inline style
     searchInput.classList.toggle("active");
     if (searchInput.classList.contains("active")) {
       searchInput.focus();
     }
   }
 });
+
+// Hide input if click outside on mobile
+document.addEventListener("click", (e) => {
+  if (
+    window.innerWidth <= 480 &&
+    !searchBar.contains(e.target) &&
+    searchInput.classList.contains("active")
+  ) {
+    searchInput.classList.remove("active");
+  }
+});
+
+// Prevent propagation when clicking inside search
+searchBar.addEventListener("click", (e) => {
+  if (window.innerWidth <= 480) {
+    e.stopPropagation();
+  }
+});
+
 
 // Hide input if click outside on mobile
 document.addEventListener("click", (e) => {
