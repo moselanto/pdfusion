@@ -123,11 +123,12 @@ body {
 
 /* Mobile: only show search icon */
 @media (max-width: 480px) {
-  .search {
-    flex: none;
-    width: auto;
-    margin: 0;
+  .search input {
+    flex: 1;
+    min-width: 0; /* prevents overflow */
   }
+}
+
 
   .search input {
     display: none; /* hide input initially */
@@ -632,13 +633,13 @@ body {
   // Toggle search input on mobile
   searchBtn.addEventListener("click", () => {
     if (window.innerWidth <= 480) {
-      searchInput.style.display =
-        searchInput.style.display === "block" ? "none" : "block";
+  searchInput.style.display =
+    searchInput.style.display === "flex" ? "none" : "flex";
 
-      if (searchInput.style.display === "block") {
-        searchInput.focus();
-      }
-    }
+  if (searchInput.style.display === "flex") {
+    searchInput.focus();
+  }
+}
   });
 
   // ➕ Create Dropdown Toggle
