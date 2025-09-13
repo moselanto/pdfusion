@@ -1,86 +1,77 @@
-  const searchBar = document.querySelector(".search");
-  const searchInput = document.querySelector(".search input");
-  const searchBtn = document.querySelector(".search button");
+const searchBar = document.querySelector(".search");
+const searchInput = document.querySelector(".search input");
+const searchBtn = document.querySelector(".search button");
 
-  // Toggle search input on mobile
-  searchBtn.addEventListener("click", () => {
-    if (window.innerWidth <= 480) {
-      searchInput.style.display =
-        searchInput.style.display === "block" ? "none" : "block";
-
-      if (searchInput.style.display === "block") {
-        searchInput.focus();
-      }
+// Toggle search input on mobile
+searchBtn.addEventListener("click", () => {
+  if (window.innerWidth <= 480) {
+    searchInput.style.display = searchInput.style.display === "block" ? "none" : "block";
+    if (searchInput.style.display === "block") {
+      searchInput.focus();
     }
-  });
+  }
+});
 
-  // ➕ Create Dropdown Toggle
+// ➕ Create Dropdown Toggle
 const createBtn = document.getElementById("createBtn");
 const dropdownMenu = document.getElementById("dropdownMenu");
-
 createBtn.addEventListener("click", () => {
   dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
 });
-
 window.addEventListener("click", (e) => {
   if (!e.target.closest(".create-dropdown")) {
     dropdownMenu.style.display = "none";
   }
 });
-  
-  // Highlight clicked category
-  const chips = document.querySelectorAll(".chip");
-  chips.forEach(chip => {
-    chip.addEventListener("click", () => {
-      document.querySelector(".chip.active")?.classList.remove("active");
-      chip.classList.add("active");
-    });
+
+// Highlight clicked category
+const chips = document.querySelectorAll(".chip");
+chips.forEach(chip => {
+  chip.addEventListener("click", () => {
+    document.querySelector(".chip.active")?.classList.remove("active");
+    chip.classList.add("active");
   });
+});
 
-  // Scroll arrows with auto-hide
-  const categories = document.getElementById("categories");
-  const scrollLeftBtn = document.getElementById("scrollLeft");
-  const scrollRightBtn = document.getElementById("scrollRight");
+// Scroll arrows with auto-hide
+const categories = document.getElementById("categories");
+const scrollLeftBtn = document.getElementById("scrollLeft");
+const scrollRightBtn = document.getElementById("scrollRight");
 
-  function updateArrows() {
-    // At left edge
-    if (categories.scrollLeft <= 0) {
-      scrollLeftBtn.style.display = "none";
-    } else {
-      scrollLeftBtn.style.display = "flex";
-    }
-
-    // At right edge
-    if (categories.scrollLeft + categories.clientWidth >= categories.scrollWidth - 1) {
-      scrollRightBtn.style.display = "none";
-    } else {
-      scrollRightBtn.style.display = "flex";
-    }
+function updateArrows() {
+  // At left edge
+  if (categories.scrollLeft <= 0) {
+    scrollLeftBtn.style.display = "none";
+  } else {
+    scrollLeftBtn.style.display = "flex";
   }
+  // At right edge
+  if (categories.scrollLeft + categories.clientWidth >= categories.scrollWidth - 1) {
+    scrollRightBtn.style.display = "none";
+  } else {
+    scrollRightBtn.style.display = "flex";
+  }
+}
 
-  scrollLeftBtn.addEventListener("click", () => {
-    categories.scrollBy({ left: -200, behavior: "smooth" });
-  });
+scrollLeftBtn.addEventListener("click", () => {
+  categories.scrollBy({ left: -200, behavior: "smooth" });
+});
 
-  scrollRightBtn.addEventListener("click", () => {
-    categories.scrollBy({ left: 200, behavior: "smooth" });
-  });
+scrollRightBtn.addEventListener("click", () => {
+  categories.scrollBy({ left: 200, behavior: "smooth" });
+});
 
-  categories.addEventListener("scroll", updateArrows);
-  window.addEventListener("resize", updateArrows);
+categories.addEventListener("scroll", updateArrows);
+window.addEventListener("resize", updateArrows);
 
-  // Run once on load
-  updateArrows();
-</script>
+// Run once on load
+updateArrows();
 
-  
-  <!-- ✅ JavaScript at bottom -->
- <script>
-  const menuBtn = document.getElementById("menuBtn");
-  const drawer = document.getElementById("drawer");
-  const content = document.querySelector(".content");
+const menuBtn = document.getElementById("menuBtn");
+const drawer = document.getElementById("drawer");
+const content = document.querySelector(".content");
 
-  menuBtn.addEventListener("click", () => {
-    drawer.classList.toggle("active");
-    content.classList.toggle("shifted");
-  });
+menuBtn.addEventListener("click", () => {
+  drawer.classList.toggle("active");
+  content.classList.toggle("shifted");
+});
