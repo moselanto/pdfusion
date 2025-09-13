@@ -55,48 +55,43 @@ body {
   height: 24px;
 }
 
-/* Desktop (unchanged) */
 .search {
   flex: 1;
   max-width: 600px;
   margin: 0 40px;
   display: flex;
   align-items: center;
-  height: 40px;
+  height: 40px; /* make search bar height consistent */
 }
 
-/* Mobile overrides */
-@media (max-width: 768px) {
-  .search {
-    margin: 0 8px;
-    max-width: none;
-    flex: 1;
-  }
+.search input {
+  flex: 1;
+  padding: 0 12px; /* remove vertical padding */
+  border: 1px solid #ccc;
+  border-right: none;
+  border-radius: 40px 0 0 40px;
+  font-size: 16px;
+  outline: none;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  height: 100%; /* match container height */
+}
 
-  .search input {
-    font-size: 14px; /* slightly smaller text */
-    padding: 0 8px;
-  }
+.search button {
+  width: 64px;
+  border: 1px solid #ccc;
+  border-radius: 0 40px 40px 0;
+  background: #f8f8f8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* match input height */
+}
 
-  .search button {
-    width: 48px; /* smaller button */
-    min-width: 48px; /* keeps icon clickable */
-  }
-
-  /* Optionally hide text input on very small screens */
-  @media (max-width: 480px) {
-    .search {
-      flex: none;
-      width: auto;
-    }
-    .search input {
-      display: none; /* search icon only */
-    }
-    .search button {
-      border-radius: 50%; /* round button */
-      border-left: 1px solid #ccc;
-    }
-
+.search button:hover {
+  background: #f0f0f0;
+}
     
  .search button svg {
   width: 20px;   /* smaller than before */
