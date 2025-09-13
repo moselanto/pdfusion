@@ -120,6 +120,13 @@ body {
   object-fit: cover;
   cursor: pointer;
 }
+    @media (max-width: 480px) {
+  .search input {
+    flex: 1;
+    min-width: 0; /* prevents overflow */
+  }
+}
+
 
 /* Mobile: only show search icon */
 @media (max-width: 480px) {
