@@ -3,569 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <title>YouTube clone group 1</title>
-  <style>
-body {
-  margin: 0;
-  font-family: Roboto, Arial, sans-serif;
-  background-color: #f9f9f9;
-}
-
-/* Top Nav */
-.topbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 56px;
-  background: #fff;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  z-index: 1000;
-}
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.menu-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-}
-
-.menu-btn svg {
-  width: 24px;
-  height: 24px;
-  fill: #000;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo svg {
-  height: 24px;
-}
-
-.search {
-  flex: 1;
-  max-width: 600px;
-  margin: 0 40px;
-  display: flex;
-  align-items: center;
-  height: 40px; /* make search bar height consistent */
-}
-
-.search input {
-  flex: 1;
-  padding: 0 12px; /* remove vertical padding */
-  border: 1px solid #ccc;
-  border-right: none;
-  border-radius: 40px 0 0 40px;
-  font-size: 16px;
-  outline: none;
-  background: #fff;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  height: 100%; /* match container height */
-}
-
-.search button {
-  width: 64px;
-  border: 1px solid #ccc;
-  border-radius: 0 40px 40px 0;
-  background: #f8f8f8;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%; /* match input height */
-}
-
-.search button:hover {
-  background: #f0f0f0;
-}
-    
- .search button svg {
-  width: 20px;   /* smaller than before */
-  height: 20px;
-  fill: #606060;
-}
-
-
-.user-actions {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.user-actions svg {
-  width: 24px;
-  height: 24px;
-  fill: #606060;
-  cursor: pointer;
-}
-
-.profile {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-}
-    @media (max-width: 480px) {
-  .search input {
-    flex: 1;
-    min-width: 0; /* prevents overflow */
-  }
-}
-
-
-/* Mobile: only show search icon */
-@media (max-width: 480px) {
-  .search {
-    flex: none;
-    width: auto;
-    margin: 0;
-  }
-
-  .search input {
-    display: none; /* hide input initially */
-  }
-
-  .search button {
-    width: 40px;
-    min-width: 40px;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-    border-left: none;
-    background: #f8f8f8;
-  }
-}    
-
-/* Sidebar - compact style */
-.sidebar {
-  position: fixed;
-  top: 56px;
-  left: 0;
-  bottom: 0;
-  width: 72px; /* compact width */
-  background: #fff;
-  border-right: 1px solid #ddd;
-  overflow-y: auto;
-  transition: transform 0.3s ease;
-  z-index: 999;
-  padding-top: 10px;
-}
-
-.sidebar a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 14px 0;
-  text-decoration: none;
-  color: #333;
-  font-size: 11px;
-}
-
-.sidebar a .icon {
-  font-size: 20px;
-  margin-bottom: 6px;
-  color: #606060;
-}
-
-    /* Scroll arrows */
-.scroll-btn {
-  background: #fff;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  width: 40px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #606060;
-  font-size: 20px;
-  position: absolute;
-  top: 0;
-  z-index: 1000;
-}
-
-.scroll-btn.left {
-  left: 0;
-}
-
-.scroll-btn.right {
-  right: 0;
-}
-
-.scroll-btn:hover {
-  background: rgba(0,0,0,0.05);
-}
-
-
-/* Expandable drawer (big nav) */
-/* Drawer */
-.drawer {
-  position: fixed;
-  top: 56px; /* below topbar */
-  left: 0;
-  bottom: 0;
-  width: 240px;
-  background: #fff;
-  border-right: 1px solid #ddd;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
-  z-index: 2000;
-  overflow-y: auto;
-  padding-top: 10px;
-}
-
-.drawer.active {
-  transform: translateX(0);
-}
-    .drawer a {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 24px;
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
-}
-
-.drawer a:hover {
-  background: #f2f2f2;
-}
-/* Content shifts when drawer is open */
-.content {
-  margin-top: 10px; /* only accounts for topbar */
-}
-
-.content.shifted {
-  margin-left: 240px; /* match drawer width */
-}
-
-/* Hide overlay if we are pushing instead */
-.overlay {
-  display: none;
-}
-
-
-/* Categories row wrapper */
-.categories-wrapper {
-  position: sticky;
-  top: 56px;
-  left: 72px; /* offset for small sidebar */
-  right: 0;
-  height: 48px;
-  background: #fff;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  z-index: 900;
-  overflow-x: hidden; /* ✅ keeps scroll arrows working but doesn’t hide chips */
-}
-
-.categories {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  overflow-x: auto;
-  white-space: nowrap;
-  flex: 1;
-  padding: 0 40px;  /* remove left padding */
-  scrollbar-width: none;
-}
-
-
-.categories::-webkit-scrollbar {
-  display: none;
-}
-
-.chip {
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 16px;
-  background: #f2f2f2;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.chip.active {
-  background: #000;
-  color: #fff;
-}
-
-/* Default content layout (below only the topbar) */
-.content {
-  margin-top: 10px;   /* just the topbar height */
-  margin-left: 72px;  /* account for compact sidebar */
-  padding: 16px;
-}
-
-/* When categories bar is present */
-.categories-wrapper + .content {
-  margin-top: 10px;  /* 10px topbar + 48px categories */
-  padding-top: 0;     /* remove extra gap */
-}
-
-
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.video-card {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-/* 🔥 Fix black bars */
-.video-thumbnail {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9; /* enforce 16:9 ratio */
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.video-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* crop instead of showing black padding */
-  display: block;
-}
-
-.duration,
-.live-badge {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  font-size: 12px;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.duration {
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-}
-
-.live-badge {
-  background: red;
-  color: #fff;
-  font-weight: bold;
-}
-
-.video-info {
-  display: flex;
-  margin-top: 8px;
-  gap: 12px;
-}
-
-.channel-icon img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.video-text {
-  flex: 1;
-}
-
-.video-title {
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 4px;
-  line-height: 1.3;
-  color: #000;
-}
-
-.video-meta {
-  font-size: 12px;
-  color: #606060;
-}
-
-.sponsored {
-  border: 1px solid #ddd;
-  padding: 8px;
-  border-radius: 12px;
-  background: #fff8f0;
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .sidebar {
-    display: none;
-  }
-  .categories-wrapper {
-    left: 0;
-  }
-  .content {
-    margin-left: 0;
-  }
-  .search {
-    max-width: 100%;
-    margin: 0 10px;
-  }
-}
-
-/* 🎤 Voice Search Button (outside search bar) */
-.voice-btn {
-  background: #f8f8f8;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 16px;
-}
-.voice-btn:hover {
-  background: #eee;
-}
-
-    
-    /* 🎤 Voice Search Button */
-.search #voiceBtn {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-left: none;
-  background: #f8f8f8;
-  cursor: pointer;
-  border-radius: 0 2px 2px 0;
-  font-size: 16px;
-}
-
-/* ➕ Create Dropdown */
-.create-dropdown {
-  position: relative;
-}
-
-#createBtn {
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 36px;
-  right: 0;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-  flex-direction: column;
-  min-width: 160px;
-  z-index: 2000;
-}
-
-.dropdown-menu a {
-  padding: 10px 14px;
-  text-decoration: none;
-  color: #000;
-  font-size: 14px;
-  display: block;
-}
-
-.dropdown-menu a:hover {
-  background: #f2f2f2;
-}
-
-  </style>
-
-  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- ✅ Add Voice Search + Create Dropdown without removing existing code -->
-
-<!-- Topbar -->
-<div class="topbar">
-  <div class="nav-left">
-    <button class="menu-btn" id="menuBtn">
-      <svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
-    </button>
-    <div class="logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 20">
-        <path fill="#FF0000" d="M88.0,2.5c-0.9-1.7-1.9-2.1-3.9-2.2C80.2,0,70,0,70,0s-10.2,0-14.1,0.3c-2,0.1-3,0.5-3.9,2.2
-        c-0.9,1.7-0.9,5.2-0.9,5.2s0,3.5,0.9,5.2c0.9,1.7,1.9,2.1,3.9,2.2C59.8,15,70,15,70,15s10.2,0,14.1-0.3c2-0.1,3-0.5,3.9-2.2
-        c0.9-1.7,0.9-5.2,0.9-5.2S89,4.2,88.0,2.5z"/>
-        <polygon fill="#FFF" points="60,4.5 60,10.5 65,7.5"/>
-      </svg>
-      <span style="font-weight:bold; font-size:18px; color:#000;">YouTube</span>
-    </div>
-  </div>
-
-  <!-- Search bar (only text + search button) -->
-  <div class="search">
-  <input type="text" placeholder="Search" id="searchInput">
-  <button>
-    <svg viewBox="0 0 24 24">
-      <path d="M15.5 14h-.79l-.28-.27A6.471 
-      6.471 0 0016 9.5 6.5 6.5 0 109.5 
-      16c1.61 0 3.09-.59 
-      4.23-1.57l.27.28v.79l5 4.99L20.49 
-      19l-4.99-5zm-6 0C8.01 14 
-      6 11.99 6 9.5S8.01 5 10.5 
-      5 15 7.01 15 9.5 12.99 14 
-      10.5 14z"></path>
-    </svg>
-  </button>
-</div>
-
-  <!-- Voice search + user actions -->
-  <div class="user-actions">
-    <!-- 🎤 Voice search button -->
-    <button id="voiceBtn" class="voice-btn" title="Search with your voice">🎤</button>
-
-    <!-- ➕ Create button with dropdown -->
-    <div class="create-dropdown">
-      <svg id="createBtn" viewBox="0 0 24 24">
-        <path d="M12 5v14m-7-7h14" stroke="#606060" stroke-width="2" fill="none" stroke-linecap="round"/>
-      </svg>
-      <div class="dropdown-menu" id="dropdownMenu">
-        <a href="#">📹 Upload video</a>
-        <a href="#">🔴 Go live</a>
-        <a href="#">📝 Create post</a>
+  <!-- ✅ Topbar -->
+  <div class="topbar">
+    <div class="nav-left">
+      <button class="menu-btn" id="menuBtn">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+      </button>
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 20">
+          <path fill="#FF0000" d="M88.0,2.5c-0.9-1.7-1.9-2.1-3.9-2.2C80.2,0,70,0,70,0s-10.2,0-14.1,0.3c-2,0.1-3,0.5-3.9,2.2
+          c-0.9,1.7-0.9,5.2-0.9,5.2s0,3.5,0.9,5.2c0.9,1.7,1.9,2.1,3.9,2.2C59.8,15,70,15,70,15s10.2,0,14.1-0.3c2-0.1,3-0.5,3.9-2.2
+          c0.9-1.7,0.9-5.2,0.9-5.2S89,4.2,88.0,2.5z"/>
+          <polygon fill="#FFF" points="60,4.5 60,10.5 65,7.5"/>
+        </svg>
+        <span style="font-weight:bold; font-size:18px; color:#000;">YouTube</span>
       </div>
     </div>
 
-    <!-- Notifications + Profile -->
-    <svg viewBox="0 0 24 24"><path d="M12 24c1.1 0 2-.9 2-2h-4a2 
-    2 0 002 2zm6-6V11c0-3.07-1.63-5.64-4.5-6.32V4a1.5 
-    1.5 0 00-3 0v.68C7.63 5.36 6 7.92 6 
-    11v7l-2 2v1h16v-1l-2-2z"/></svg>
-    <img class="profile" src="https://yt3.ggpht.com/yti/ANjgQV8vfw_JjwyHqfdtMnwMKypM4A34Tg3Y9Rk_nUYLhcTKUJ0=s88-c-k-c0x00ffffff-no-rj" alt="Profile">
-  </div>
-</div>
+    <!-- Search bar -->
+    <div class="search">
+      <input type="text" placeholder="Search" id="searchInput">
+      <button>
+        <svg viewBox="0 0 24 24">
+          <path d="M15.5 14h-.79l-.28-.27A6.471 
+          6.471 0 0016 9.5 6.5 6.5 0 109.5 
+          16c1.61 0 3.09-.59 
+          4.23-1.57l.27.28v.79l5 4.99L20.49 
+          19l-4.99-5zm-6 0C8.01 14 
+          6 11.99 6 9.5S8.01 5 10.5 
+          5 15 7.01 15 9.5 12.99 14 
+          10.5 14z"></path>
+        </svg>
+      </button>
+    </div>
 
-
+    <!-- Voice search + user actions -->
     <div class="user-actions">
+      <button id="voiceBtn" class="voice-btn" title="Search with your voice">🎤</button>
+
+      <div class="create-dropdown">
+        <svg id="createBtn" viewBox="0 0 24 24">
+          <path d="M12 5v14m-7-7h14" stroke="#606060" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="#">📹 Upload video</a>
+          <a href="#">🔴 Go live</a>
+          <a href="#">📝 Create post</a>
+        </div>
+      </div>
+
       <svg viewBox="0 0 24 24"><path d="M12 24c1.1 0 2-.9 2-2h-4a2 
       2 0 002 2zm6-6V11c0-3.07-1.63-5.64-4.5-6.32V4a1.5 
       1.5 0 00-3 0v.68C7.63 5.36 6 7.92 6 
       11v7l-2 2v1h16v-1l-2-2z"/></svg>
-      <img class="profile" src="https://i.pravatar.cc/40?img=20" alt="Profile">
+      <img class="profile" src="https://yt3.ggpht.com/yti/ANjgQV8vfw_JjwyHqfdtMnwMKypM4A34Tg3Y9Rk_nUYLhcTKUJ0=s88-c-k-c0x00ffffff-no-rj" alt="Profile">
     </div>
   </div>
 
-  <!-- Compact Sidebar -->
+  <!-- Sidebar -->
   <div class="sidebar">
     <a href="#"><span class="icon">🏠</span>Home</a>
     <a href="#"><span class="icon">🎬</span>Shorts</a>
@@ -587,420 +85,52 @@ body {
     <a href="#"><span class="icon">👍</span> Liked videos</a>
     <hr>
     <a href="#"><span class="icon">📺</span> Subscriptions</a>
-    <a href="#">Moonbug Kids - Best Cars and Truck Videos for Kids</a>
-    <a href="#">LooLoo Kids - Nursery Rhymes and Children's Songs</a>
+    <a href="#">Moonbug Kids - Best Cars</a>
+    <a href="#">LooLoo Kids - Nursery Rhymes</a>
   </div>
 
-  <!-- Overlay (separate from drawer) -->
+  <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
 
   <!-- Categories -->
   <div class="categories-wrapper">
-  <button class="scroll-btn left" id="scrollLeft">◀</button>
-  
-  <div class="categories" id="categories">
-    <div class="chip active">All</div>
-    <div class="chip">Music</div>
-    <div class="chip">African Music</div>
-    <div class="chip">Playlists</div>
-    <div class="chip">Mixes</div>
-    <div class="chip">Riddim</div>
-    <div class="chip">Live</div>
-    <div class="chip">Podcasts</div>
-    <div class="chip">Dr. Dre</div>
-    <div class="chip">Web pages</div>
-    <div class="chip">New-Age Music</div>
-    <div class="chip">Contemporary Worship Music</div>
-    <div class="chip">Comedy</div>
-    <div class="chip">Animated films</div>
-    <div class="chip">Recently uploaded</div>
-    <div class="chip">Watched</div>
-    <div class="chip">New to you</div>
+    <button class="scroll-btn left" id="scrollLeft">◀</button>
+    <div class="categories" id="categories">
+      <div class="chip active">All</div>
+      <div class="chip">Music</div>
+      <div class="chip">African Music</div>
+      <div class="chip">Playlists</div>
+      <div class="chip">Mixes</div>
+      <div class="chip">Riddim</div>
+      <div class="chip">Live</div>
+      <div class="chip">Podcasts</div>
+      <div class="chip">Comedy</div>
+      <div class="chip">Recently uploaded</div>
+    </div>
+    <button class="scroll-btn right" id="scrollRight">▶</button>
   </div>
-  
-  <button class="scroll-btn right" id="scrollRight">▶</button>
-</div>
 
-
-   <!-- Content (video grid etc.) -->
+  <!-- Content -->
   <div class="content">
     <div class="video-grid">
-      <!-- Your video cards go here -->
-    </div>
-  </div>
-
-
-<script>
-
-  const searchBar = document.querySelector(".search");
-  const searchInput = document.querySelector(".search input");
-  const searchBtn = document.querySelector(".search button");
-
-  // Toggle search input on mobile
-  searchBtn.addEventListener("click", () => {
-    if (window.innerWidth <= 480) {
-      searchInput.style.display =
-        searchInput.style.display === "block" ? "none" : "block";
-
-      if (searchInput.style.display === "block") {
-        searchInput.focus();
-      }
-    }
-  });
-
-  // ➕ Create Dropdown Toggle
-const createBtn = document.getElementById("createBtn");
-const dropdownMenu = document.getElementById("dropdownMenu");
-
-createBtn.addEventListener("click", () => {
-  dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
-});
-
-window.addEventListener("click", (e) => {
-  if (!e.target.closest(".create-dropdown")) {
-    dropdownMenu.style.display = "none";
-  }
-});
-  
-  // Highlight clicked category
-  const chips = document.querySelectorAll(".chip");
-  chips.forEach(chip => {
-    chip.addEventListener("click", () => {
-      document.querySelector(".chip.active")?.classList.remove("active");
-      chip.classList.add("active");
-    });
-  });
-
-  // Scroll arrows with auto-hide
-  const categories = document.getElementById("categories");
-  const scrollLeftBtn = document.getElementById("scrollLeft");
-  const scrollRightBtn = document.getElementById("scrollRight");
-
-  function updateArrows() {
-    // At left edge
-    if (categories.scrollLeft <= 0) {
-      scrollLeftBtn.style.display = "none";
-    } else {
-      scrollLeftBtn.style.display = "flex";
-    }
-
-    // At right edge
-    if (categories.scrollLeft + categories.clientWidth >= categories.scrollWidth - 1) {
-      scrollRightBtn.style.display = "none";
-    } else {
-      scrollRightBtn.style.display = "flex";
-    }
-  }
-
-  scrollLeftBtn.addEventListener("click", () => {
-    categories.scrollBy({ left: -200, behavior: "smooth" });
-  });
-
-  scrollRightBtn.addEventListener("click", () => {
-    categories.scrollBy({ left: 200, behavior: "smooth" });
-  });
-
-  categories.addEventListener("scroll", updateArrows);
-  window.addEventListener("resize", updateArrows);
-
-  // Run once on load
-  updateArrows();
-</script>
-
-  
-  <!-- ✅ JavaScript at bottom -->
- <script>
-  const menuBtn = document.getElementById("menuBtn");
-  const drawer = document.getElementById("drawer");
-  const content = document.querySelector(".content");
-
-  menuBtn.addEventListener("click", () => {
-    drawer.classList.toggle("active");
-    content.classList.toggle("shifted");
-  });
-</script>
-
-  <div class="content">
-    <div class="video-grid">
-
-      <!-- LIVE Tim Janis -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/dXIyMS61B68/hqdefault.jpg" alt="Tim Janis Live">
-    <span class="live-badge">LIVE</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/F4QbLbxen8plplGPfWcsq4a3NCsEOUX4iBhpBlPJYP4yzzqD5FzRvUelVCJmfv_P3mBJXdEE=s88-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">Beautiful Relaxing Peaceful Music, Calm Music 24/7, "Tropical Shores" By Tim Janis</div>
-      <div class="video-meta">Tim Janis • 3.3K watching</div>
-    </div>
-  </div>
-</div>
-
-<!-- DJ STAN Party Vibes -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/V7y9j8v81Sw/hqdefault.jpg" alt="DJ STAN Night Party Vibes">
-    <span class="duration">1:00:28</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/suuO2tdVaTjuPCKnLciWqT2m9IJLRUTUTtFtqrGwnYbnL85CjxS2_trEHZB-TZzqhDmOSYAFNg=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">🔥DJ STAN NIGHT PARTY VIBES FT 🚀 TAYA | BIEN | OKELLO MAX | MIX 2025 ^Ladies Edition</div>
-      <div class="video-meta">DJ STAN 🇰🇪 • 84K views • 6 days ago</div>
-    </div>
-  </div>
-</div>
-
-      <!-- BEST OF MUGITHI -->
+      <!-- Example Video -->
       <div class="video-card">
         <div class="video-thumbnail">
-          <img src="https://img.youtube.com/vi/hJQUh6yZkFY/hqdefault.jpg" alt="Mugithi">
-          <span class="duration">1:20:06</span>
-        </div>
-        <div class="video-info">
-          <div class="channel-icon"><img src="https://yt3.ggpht.com/sXqkNJIBrDSkUQGNGnWCQ6SpSXlktR0N5_srTZ5L7AfTslKIo6vyD-Il70TMKYYuyTb5wxy-fA=s68-c-k-c0x00ffffff-no-rj"></div>
-          <div class="video-text">
-            <div class="video-title">BEST OF MUGITHI MASHUPS MIXTAPE WITH SELECTOR DEDEE</div>
-            <div class="video-meta">DEDEE • 99K views • 1 month ago</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- LIVE ODM -->
-      <div class="video-card">
-        <div class="video-thumbnail">
-          <img src="https://img.youtube.com/vi/orHJaye0VWk/hqdefault.jpg" alt="ODM Live">
+          <img src="https://img.youtube.com/vi/dXIyMS61B68/hqdefault.jpg" alt="Tim Janis Live">
           <span class="live-badge">LIVE</span>
         </div>
         <div class="video-info">
-          <div class="channel-icon"><img src="https://yt3.ggpht.com/Ch-3PsStY-tVD6t62AIOUD87NJB-gcRfHGC44P45OyfWHkiO25ILWMzf5nhcih4V5RiPAVFK3g=s68-c-k-c0x00ffffff-no-rj"></div>
+          <div class="channel-icon"><img src="https://yt3.ggpht.com/F4QbLbxen8plplGPfWcsq4a3NCsEOUX4iBhpBlPJYP4yzzqD5FzRvUelVCJmfv_P3mBJXdEE=s88-c-k-c0x00ffffff-no-rj"></div>
           <div class="video-text">
-            <div class="video-title">LIVE; ODM UNVEILING CANDIDATES FOR UPCOMING BY-ELECTIONS!</div>
-            <div class="video-meta">Kenya News Alerts TV • 278 watching</div>
+            <div class="video-title">Beautiful Relaxing Music 24/7</div>
+            <div class="video-meta">Tim Janis • 3.3K watching</div>
           </div>
         </div>
       </div>
-
-      <!-- DJ Joe Mfalme -->
-      <div class="video-card">
-        <div class="video-thumbnail">
-          <img src="https://img.youtube.com/vi/Ve8DC9W_QnQ/hqdefault.jpg" alt="DJ Joe">
-          <span class="duration">1:04:25</span>
-        </div>
-        <div class="video-info">
-          <div class="channel-icon"><img src="https://yt3.ggpht.com/r8KZsJ3NmOjpteAStOi8tw9hhC_yNqI41D3OTB2Gx8Tpd_NwhOW4rm6TcP57moEpfUb4s2bvudM=s68-c-k-c0x00ffffff-no-rj"></div>
-          <div class="video-text">
-            <div class="video-title">Dj Joe Mfalme Mixx 106 - Amapiano, Afro.</div>
-            <div class="video-meta">DJ Joe Mfalme • 63K views • 9 days ago</div>
-          </div>
-        </div>
-      </div>
-
-    
-      <!-- Continue filling each video in same format... -->
-      <!-- Example for African Music Greatest Hits -->
-      <div class="video-card">
-        <div class="video-thumbnail">
-          <img src="https://img.youtube.com/vi/86gSdNES4qY/hqdefault.jpg" alt="Afrobeat 2025">
-          <span class="live-badge">LIVE</span>
-        </div>
-        <div class="video-info">
-          <div class="channel-icon"><img src="https://yt3.ggpht.com/yNVjpjswGFhbwXmZPo86i0WbN54LiBvXQmaJ96FHmjoWJ0bxoIQZqANAEQ1Gt3z2z8qYHn_kKUU=s68-c-k-c0x00ffffff-no-rj"></div>
-          <div class="video-text">
-            <div class="video-title">AFRICAN MUSIC GREATEST HITS OF 2025 (24,23)✨ AMAPIANO, AFROBEATS MIX</div>
-            <div class="video-meta">AFROBEAT 2025 • 10 watching</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Visiting Patello -->
-      <div class="video-card">
-        <div class="video-thumbnail">
-          <img src="https://img.youtube.com/vi/bGTU7s_av9A/hqdefault.jpg" alt="Patello">
-          <span class="duration">37:02</span>
-        </div>
-        <div class="video-info">
-          <div class="channel-icon"><img src="https://yt3.ggpht.com/7WLSRVvnRAKXlqc5HZd7-JxUro7bHZl_J7v8q0lyCXaok4Y_tM0Wof2lUSJHqvFPOVCP8cLbvA=s68-c-k-c0x00ffffff-no-rj"></div>
-          <div class="video-text">
-            <div class="video-title">Visiting PATELLO Na DEE Multi Million Home In Utawala!!</div>
-            <div class="video-meta">TOO PERSONAL WITH 2MBILI • 166K views • 1 day ago</div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- 48’s Weekend Free Style -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/ta4Fqr3600Y/hqdefault.jpg" alt="48's Weekend Free Style">
-    <span class="duration">1:00:27</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/bdG2i-aiIUfoB6GyeOVDmNlEU7LiOrQaLgRRXK01t5Un96hHSZ4F-mYQCEImx8m4s8eTahwfYcM=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">48's Weekend Free Style Set 11 [Ibiza live mix] #riddim #afrobeats</div>
-      <div class="video-meta">48’s Audio Lab • 19K views • 9 days ago</div>
+      <!-- Add more videos here -->
     </div>
   </div>
-</div>
 
-<!-- AMAPIANO ON THE PARK -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/FHB3M5AZ71Y/hqdefault.jpg" alt="Amapiano on the Park">
-    <span class="duration">1:14:18</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/yCC_i_BoPOJgzn60YzyMLmYxpZUp7qXr7nOqxOWXeNIk85A834j8gIBqGiTnY01y8MB7UhX6vko=s88-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">AMAPIANO ON THE PARK by Tony Slay in Stuttgart || DJ Maphorisa, Scotts Maphuma, Diamond Platnumz</div>
-      <div class="video-meta">TONY SLAY 254 • 33K views • 2 weeks ago</div>
-    </div>
-  </div>
-</div>
-
-<!-- Mugithi Rhumba Mix -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/zcA7Ru45PwQ/hqdefault.jpg" alt="Mugithi Rhumba Mix">
-    <span class="duration">53:54</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/m-j2WBTljX8fQMR2Yc5bMTz1BWnbFrnF3u7YW5DKR0BHG3u30KLZjmAyX1g7TDQWO_C0MWrupQ=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">MUGITHI RHUMBA MIX-LIVE OFFICIAL VIDEO (cover) by KAMSON</div>
-      <div class="video-meta">Kamson Official • 358K views • 5 months ago</div>
-    </div>
-  </div>
-</div>
-
-<!-- Wait A Minute -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/4vjVSa4SCuU/hqdefault.jpg" alt="Wait A Minute">
-    <span class="duration">19:24</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/Cy6L_sF9vAlB0IRcfmEkjL-QMZZqY7ZTgvBvnVbX0uVYqGs5f3pTh7yR36ln9VOiECAjTfZIIHE=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">Wait A minute!! (A Minute with the Pastor) Ep 2</div>
-      <div class="video-meta">Vinnie Baite • 69K views • 8 days ago</div>
-    </div>
-  </div>
-</div>
-
-<!-- Reggae Gospel Hits -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/4gZInHq1XXI/hqdefault.jpg" alt="Reggae Gospel Hits">
-    <span class="duration">1:40:53</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/A3N_edtJ9FThk1P8kGo1A7hjDHv-8_6b0oZDJiIae7G_c_pX4HBglwFwtWcBPmFH_MPq5n5M=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">Reggae Gospel Hits 2025 | Uplifting Praise & Worship Music</div>
-      <div class="video-meta">Radio Reggae Gospel • 1.1K views • 3 days ago</div>
-    </div>
-  </div>
-</div>
-
-      <!-- Old School 90s Mix -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/ywmfi5Ax3z8/hqdefault.jpg" alt="Old School 90s Mix">
-    <span class="duration">2:02:11</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/kMlbwoISYqJgLaainAMyZbu2alhNTDIeg6itsiEBicn-bL8KC7ijEttfbOtc8U5PymHoZb5Z1A=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">Old School 90s💥 Eminem & Snoop Dogg, Tyga, 50 Cent, Dr Dre, Ice Cube, Juicy, Drake, Cover Style 🎤 #57</div>
-      <div class="video-meta">Flow Nation • 22K views • 10 days ago</div>
-    </div>
-  </div>
-</div>
-
-<!-- WIZZOH33 ft SESKA -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/j1-cCN6poU8/hqdefault.jpg" alt="Wizzoh33 ft Seska">
-    <span class="duration">2:38</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/vybXiNywLg5Jj0eyNMzixc9LIu8OmJOYydLepf7AouIAyp7ZU_3BViuBZlYHP5HvPRMTyxNN=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">WIZZOH33 ft SESKA {Ethic Entertainment} - SI UPERFORM - [Official Visualizer]</div>
-      <div class="video-meta">Wizzoh Thirty3 Tv • 303 views • 19 hours ago</div>
-    </div>
-  </div>
-</div>
-
-<!-- BEST CLUB BANGERS MIX 2025 -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/w8dL_wGsKzI/hqdefault.jpg" alt="Best Club Bangers Mix 2025">
-    <span class="duration">59:23</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/suuO2tdVaTjuPCKnLciWqT2m9IJLRUTUTtFtqrGwnYbnL85CjxS2_trEHZB-TZzqhDmOSYAFNg=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">🔥BEST CLUB BANGERS MIX 2025🎶 FT MPISHI | BIEN | RAM RAM | NAIROBI - STAN EDITION</div>
-      <div class="video-meta">DJ STAN 🇰🇪 • 398K views • 3 months ago</div>
-    </div>
-  </div>
-</div>
-
-<!-- Zoza Podcast -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/6qblR2spLWs/hqdefault.jpg" alt="Zoza Podcast">
-    <span class="duration">1:40:41</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/kUddAjSuUJB6CLMJrTJYt_NdSwdQJT8fhZiLlnqtnYy9lQG8dezWP9Dc0loU8CrEPjkR6g7Q2w=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">Thithad3 : Gen Z Minister of Foreign Affairs | Zoza Podcast</div>
-      <div class="video-meta">ZOZA PODCAST • 66K views • 2 weeks ago</div>
-    </div>
-  </div>
-</div>
-
-<!-- Hidden Spiritual Laws -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/IsFgXbn9mjQ/hqdefault.jpg" alt="Hidden Spiritual Laws">
-    <span class="duration">1:02:25</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/AAXeARPigN6FyVhC3ApCruX1OE9y9RkPBVZtRTLVRdJYYcXVLe6NMldIxR2RMhZqy7LAdnkQIVk=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">7 Hidden Spiritual Laws That Govern Your Money - Florence Scovel Shinn</div>
-      <div class="video-meta">Shinn Wisdom • 213K views • 2 months ago</div>
-    </div>
-  </div>
-</div>
-
-<!-- Feel Instant JOY with Reggae Gospel -->
-<div class="video-card">
-  <div class="video-thumbnail">
-    <img src="https://img.youtube.com/vi/Pu4sz_Rfzk8/hqdefault.jpg" alt="Reggae Gospel Joy">
-    <span class="duration">1:39:15</span>
-  </div>
-  <div class="video-info">
-    <div class="channel-icon"><img src="https://yt3.ggpht.com/LI_rGnAyhbtgmFUd-QvjVGmjOZX0na7yiSrEDGEO696VecT5O067yzPncpvzjyPUr_PWDHmbbg=s68-c-k-c0x00ffffff-no-rj"></div>
-    <div class="video-text">
-      <div class="video-title">Feel Instant JOY with Reggae Gospel 2025 Music!</div>
-      <div class="video-meta">Soulshine Reggae Gospel • 13K views • 9 days ago</div>
-    </div>
-  </div>
-</div>
-
-
-      <!-- Keep going with GEN Z CLUB BANGERS, Rigathi Gachagua LIVE, African Swahili Love Songs, Reggae Mix, Live Afrobeat Mix, Party at THEE ALFA HOUSE, Ginja Sessions, UK Drill Mix, G63 AMG Matatu, DOPE CAESAR vs MISTA C, EP6 Born Again, Hip Hop Summer Mix, ChatGPT Leads, Kenyan RNB, Internet Lives, Latest Afrobeat Live, Best R&B Classics, More EarnApp, Nicolai Palmkvist Website Design, PHXP Cavalli, Prank video, CLUB TOUR 2025, Snoop Dogg HipHop Mix -->
-      <!-- Each in same pattern with duration or LIVE badge -->
-
-    </div>
-  </div>
+  <script src="script.js"></script>
 </body>
 </html>
