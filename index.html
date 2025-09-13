@@ -151,6 +151,19 @@ body {
 .drawer.active {
   transform: translateX(0);
 }
+    .drawer a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.drawer a:hover {
+  background: #f2f2f2;
+}
 /* Content shifts when drawer is open */
 .content {
   margin-top: 104px;
