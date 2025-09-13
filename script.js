@@ -34,7 +34,7 @@ chips.forEach(chip => {
 });
 
 // Scroll arrows with auto-hide
-const categories = document.getElementById("categories");
+const categories = document.getElementById("categories").scrollLeft = 0;
 const scrollLeftBtn = document.getElementById("scrollLeft");
 const scrollRightBtn = document.getElementById("scrollRight");
 
