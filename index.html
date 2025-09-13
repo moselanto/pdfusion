@@ -151,14 +151,15 @@ body {
 
 .scroll-btn.left {
   left: 0;
+  background: linear-gradient(to right, #fff 70%, transparent);
 }
-
 .scroll-btn.right {
   right: 0;
 }
 
-.scroll-btn:hover {
-  background: rgba(0,0,0,0.05);
+.scroll-btn.right {
+  right: 0;
+  background: linear-gradient(to left, #fff 70%, transparent);
 }
 
 
@@ -214,7 +215,7 @@ body {
 .categories-wrapper {
   position: sticky;
   top: 56px;
-  left: 72px; /* offset for small sidebar */
+  left: 72px; /* offset for sidebar */
   right: 0;
   height: 48px;
   background: #fff;
@@ -232,8 +233,25 @@ body {
   overflow-x: auto;
   white-space: nowrap;
   flex: 1;
-  padding: 0 40px;  /* remove left padding */
+  padding: 0 16px; /* ✅ Start flush to left */
   scrollbar-width: none;
+}
+
+    /* Scroll arrows with fade */
+.scroll-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #606060;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  z-index: 1001; /* above chips */
 }
 
 
@@ -478,14 +496,12 @@ body {
   const scrollRightBtn = document.getElementById("scrollRight");
 
   function updateArrows() {
-    // At left edge
     if (categories.scrollLeft <= 0) {
       scrollLeftBtn.style.display = "none";
     } else {
       scrollLeftBtn.style.display = "flex";
     }
 
-    // At right edge
     if (categories.scrollLeft + categories.clientWidth >= categories.scrollWidth - 1) {
       scrollRightBtn.style.display = "none";
     } else {
@@ -504,23 +520,10 @@ body {
   categories.addEventListener("scroll", updateArrows);
   window.addEventListener("resize", updateArrows);
 
-  // Run once on load
+  // ✅ Ensure starts at left
+  categories.scrollLeft = 0;
   updateArrows();
 </script>
-
-  
-  <!-- ✅ JavaScript at bottom -->
- <script>
-  const menuBtn = document.getElementById("menuBtn");
-  const drawer = document.getElementById("drawer");
-  const content = document.querySelector(".content");
-
-  menuBtn.addEventListener("click", () => {
-    drawer.classList.toggle("active");
-    content.classList.toggle("shifted");
-  });
-</script>
-
 
 <!DOCTYPE html>
 <html lang="en">
