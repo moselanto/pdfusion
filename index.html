@@ -166,10 +166,7 @@ body {
 }
 /* Content shifts when drawer is open */
 .content {
-  margin-top: 34px;
-  margin-left: 72px; /* default with compact sidebar */
-  padding: 20px;
-  transition: margin-left 0.3s ease-in-out;
+  margin-top: 56px; /* only accounts for topbar */
 }
 
 .content.shifted {
@@ -228,9 +225,7 @@ body {
 
 /* Content */
 .content {
-  margin-top: 104px;
-  margin-left: 72px; /* small sidebar */
-  padding: 20px;
+  margin-top: 56px; /* only accounts for topbar */
 }
 
 .video-grid {
@@ -450,7 +445,7 @@ body {
   <style>
     body {margin:0;font-family:Roboto,Arial,sans-serif;background:#f9f9f9;}
     .topbar,.sidebar,.drawer,.categories-wrapper{/* keep your previous nav, sidebar, categories styles */}
-    .content {margin-top:104px;margin-left:72px;padding:20px;}
+    .content {margin-top:54px;margin-left:72px;padding:20px;}
     .video-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
     .video-card {display:flex;flex-direction:column;position:relative;}
     .video-thumbnail {position:relative;}
