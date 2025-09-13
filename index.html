@@ -132,38 +132,42 @@ body {
 }
 
 /* Expandable drawer (big nav) */
+/* Drawer */
 .drawer {
   position: fixed;
-  top: 0;
+  top: 56px; /* below topbar */
   left: 0;
   bottom: 0;
   width: 240px;
   background: #fff;
   border-right: 1px solid #ddd;
   transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-in-out;
   z-index: 2000;
-  padding-top: 56px;
   overflow-y: auto;
+  padding-top: 10px;
 }
 
 .drawer.active {
   transform: translateX(0);
 }
-
-.drawer a {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 24px;
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
+/* Content shifts when drawer is open */
+.content {
+  margin-top: 104px;
+  margin-left: 72px; /* default with compact sidebar */
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
 }
 
-.drawer a:hover {
-  background: #f2f2f2;
+.content.shifted {
+  margin-left: 240px; /* match drawer width */
 }
+
+/* Hide overlay if we are pushing instead */
+.overlay {
+  display: none;
+}
+
 
 /* Categories row wrapper */
 .categories-wrapper {
@@ -413,21 +417,17 @@ body {
   </div>
 
   <!-- ✅ JavaScript at bottom -->
-  <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const drawer = document.getElementById("drawer");
-    const overlay = document.getElementById("overlay");
+ <script>
+  const menuBtn = document.getElementById("menuBtn");
+  const drawer = document.getElementById("drawer");
+  const content = document.querySelector(".content");
 
-    menuBtn.addEventListener("click", () => {
-      drawer.classList.toggle("active");
-      overlay.classList.toggle("active");
-    });
+  menuBtn.addEventListener("click", () => {
+    drawer.classList.toggle("active");
+    content.classList.toggle("shifted");
+  });
+</script>
 
-    overlay.addEventListener("click", () => {
-      drawer.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-  </script>
 
 <!DOCTYPE html>
 <html lang="en">
