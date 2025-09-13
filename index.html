@@ -379,6 +379,9 @@ body {
     <a href="#">LooLoo Kids - Nursery Rhymes and Children's Songs</a>
   </div>
 
+  <!-- Overlay (separate from drawer) -->
+  <div class="overlay" id="overlay"></div>
+
   <!-- Categories -->
   <div class="categories-wrapper">
     <div class="categories" id="categories">
@@ -401,6 +404,30 @@ body {
       <div class="chip">New to you</div>
     </div>
   </div>
+
+   <!-- Content (video grid etc.) -->
+  <div class="content">
+    <div class="video-grid">
+      <!-- Your video cards go here -->
+    </div>
+  </div>
+
+  <!-- ✅ JavaScript at bottom -->
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const drawer = document.getElementById("drawer");
+    const overlay = document.getElementById("overlay");
+
+    menuBtn.addEventListener("click", () => {
+      drawer.classList.toggle("active");
+      overlay.classList.toggle("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      drawer.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+  </script>
 
 <!DOCTYPE html>
 <html lang="en">
