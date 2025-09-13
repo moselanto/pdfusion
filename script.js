@@ -34,7 +34,7 @@ chips.forEach(chip => {
 });
 
 // Scroll arrows with auto-hide
-const categories = document.getElementById("categories").scrollLeft = 0;
+const categories = document.getElementById("categories");
 const scrollLeftBtn = document.getElementById("scrollLeft");
 const scrollRightBtn = document.getElementById("scrollRight");
 
@@ -74,8 +74,4 @@ const content = document.querySelector(".content");
 menuBtn.addEventListener("click", () => {
   drawer.classList.toggle("active");
   content.classList.toggle("shifted");
-});
-
-document.getElementById('mobileSearchToggle').addEventListener('click', function() {
-  document.querySelector('.search').style.display = 'flex';
 });
