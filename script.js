@@ -3,12 +3,25 @@ const searchInput = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
 
 // Toggle search input on mobile
-searchBtn.addEventListener("click", () => {
+searchBtn.addEventListener("click", (e) => {
   if (window.innerWidth <= 480) {
-    searchInput.style.display = searchInput.style.display === "block" ? "none" : "block";
-    if (searchInput.style.display === "block") {
+    e.preventDefault();
+    // Use a class for toggling instead of inline style
+    searchInput.classList.toggle("active");
+    if (searchInput.classList.contains("active")) {
       searchInput.focus();
     }
+  }
+});
+
+// Hide input if click outside on mobile
+document.addEventListener("click", (e) => {
+  if (
+    window.innerWidth <= 480 &&
+    !searchBar.contains(e.target) &&
+    searchInput.classList.contains("active")
+  ) {
+    searchInput.classList.remove("active");
   }
 });
 
