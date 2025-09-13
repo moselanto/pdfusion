@@ -87,8 +87,8 @@ body {
   background: #f0f0f0;
 }
     
- .search button svg {
-  width: 20px;   /* smaller than before */
+.search button svg {
+  width: 20px;
   height: 20px;
   fill: #606060;
 }
@@ -121,7 +121,7 @@ body {
   top: 56px;
   left: 0;
   bottom: 0;
-  width: 72px; /* compact width */
+  width: 72px;
   background: #fff;
   border-right: 1px solid #ddd;
   overflow-y: auto;
@@ -146,7 +146,7 @@ body {
   color: #606060;
 }
 
-    /* Scroll arrows */
+/* Scroll arrows */
 .scroll-btn {
   background: #fff;
   border: none;
@@ -176,12 +176,10 @@ body {
   background: rgba(0,0,0,0.05);
 }
 
-
 /* Expandable drawer (big nav) */
-/* Drawer */
 .drawer {
   position: fixed;
-  top: 56px; /* below topbar */
+  top: 56px;
   left: 0;
   bottom: 0;
   width: 240px;
@@ -197,7 +195,7 @@ body {
 .drawer.active {
   transform: translateX(0);
 }
-    .drawer a {
+.drawer a {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -224,12 +222,11 @@ body {
   display: none;
 }
 
-
 /* Categories row wrapper */
 .categories-wrapper {
   position: sticky;
   top: 56px;
-  left: 72px; /* offset for small sidebar */
+  left: 72px;
   right: 0;
   height: 48px;
   background: #fff;
@@ -237,7 +234,7 @@ body {
   display: flex;
   align-items: center;
   z-index: 900;
-  overflow-x: hidden; /* ✅ keeps scroll arrows working but doesn’t hide chips */
+  overflow-x: hidden;
 }
 
 .categories {
@@ -247,10 +244,9 @@ body {
   overflow-x: auto;
   white-space: nowrap;
   flex: 1;
-  padding: 0 40px;  /* remove left padding */
+  padding: 0 40px;
   scrollbar-width: none;
 }
-
 
 .categories::-webkit-scrollbar {
   display: none;
@@ -272,17 +268,16 @@ body {
 
 /* Default content layout (below only the topbar) */
 .content {
-  margin-top: 10px;   /* just the topbar height */
-  margin-left: 72px;  /* account for compact sidebar */
+  margin-top: 10px;
+  margin-left: 72px;
   padding: 16px;
 }
 
 /* When categories bar is present */
 .categories-wrapper + .content {
-  margin-top: 10px;  /* 10px topbar + 48px categories */
-  padding-top: 0;     /* remove extra gap */
+  margin-top: 10px;
+  padding-top: 0;
 }
-
 
 .video-grid {
   display: grid;
@@ -300,7 +295,7 @@ body {
 .video-thumbnail {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9; /* enforce 16:9 ratio */
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 12px;
 }
@@ -308,7 +303,7 @@ body {
 .video-thumbnail img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* crop instead of showing black padding */
+  object-fit: cover;
   display: block;
 }
 
@@ -377,6 +372,23 @@ body {
   }
   .categories-wrapper {
     left: 0;
+    overflow-x: auto; /* FIX: allow horizontal scroll on mobile */
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .categories {
+    padding: 0 8px;   /* FIX: much less padding */
+    gap: 6px;         /* FIX: smaller gap on mobile */
+  }
+  .chip {
+    font-size: 13px;
+    padding: 4px 10px;
+    margin-right: 0;
+  }
+  .scroll-btn {
+    width: 28px;
+    font-size: 18px;
+    z-index: 1001;
   }
   .content {
     margin-left: 0;
@@ -384,6 +396,18 @@ body {
   .search {
     max-width: 100%;
     margin: 0 10px;
+  }
+}
+
+/* Even smaller screens */
+@media (max-width: 480px) {
+  .categories {
+    padding: 0 4px;
+    gap: 4px;
+  }
+  .chip {
+    font-size: 12px;
+    padding: 3px 8px;
   }
 }
 
@@ -404,8 +428,7 @@ body {
   background: #eee;
 }
 
-    
-    /* 🎤 Voice Search Button */
+/* 🎤 Voice Search Button */
 .search #voiceBtn {
   padding: 8px 12px;
   border: 1px solid #ccc;
@@ -459,7 +482,7 @@ body {
     width: 90vw;
     position: fixed;
     left: 5vw;
-    top: 60px; /* Adjust as needed */
+    top: 60px;
     z-index: 1001;
     display: flex;
     background: #fff;
