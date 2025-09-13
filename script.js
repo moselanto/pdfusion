@@ -75,3 +75,7 @@ menuBtn.addEventListener("click", () => {
   drawer.classList.toggle("active");
   content.classList.toggle("shifted");
 });
+
+document.getElementById('mobileSearchToggle').addEventListener('click', function() {
+  document.querySelector('.search').style.display = 'flex';
+});
