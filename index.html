@@ -363,6 +363,24 @@ body {
   }
 }
 
+/* 🎤 Voice Search Button (outside search bar) */
+.voice-btn {
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+.voice-btn:hover {
+  background: #eee;
+}
+
+    
     /* 🎤 Voice Search Button */
 .search #voiceBtn {
   padding: 8px 12px;
@@ -435,15 +453,18 @@ body {
     </div>
   </div>
 
+  <!-- Search bar (only text + search button) -->
   <div class="search">
     <input type="text" placeholder="Search" id="searchInput">
     <button>🔍</button>
-    <!-- 🎤 Voice search -->
-    <button id="voiceBtn" title="Search with your voice">🎤</button>
   </div>
 
+  <!-- Voice search + user actions -->
   <div class="user-actions">
-    <!-- ⬇️ Create button with dropdown -->
+    <!-- 🎤 Voice search button -->
+    <button id="voiceBtn" class="voice-btn" title="Search with your voice">🎤</button>
+
+    <!-- ➕ Create button with dropdown -->
     <div class="create-dropdown">
       <svg id="createBtn" viewBox="0 0 24 24">
         <path d="M12 5v14m-7-7h14" stroke="#606060" stroke-width="2" fill="none" stroke-linecap="round"/>
@@ -455,6 +476,7 @@ body {
       </div>
     </div>
 
+    <!-- Notifications + Profile -->
     <svg viewBox="0 0 24 24"><path d="M12 24c1.1 0 2-.9 2-2h-4a2 
     2 0 002 2zm6-6V11c0-3.07-1.63-5.64-4.5-6.32V4a1.5 
     1.5 0 00-3 0v.68C7.63 5.36 6 7.92 6 
@@ -462,6 +484,7 @@ body {
     <img class="profile" src="https://i.pravatar.cc/40?img=20" alt="Profile">
   </div>
 </div>
+
 
     <div class="user-actions">
       <svg viewBox="0 0 24 24"><path d="M12 24c1.1 0 2-.9 2-2h-4a2 
