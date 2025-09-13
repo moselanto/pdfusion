@@ -233,18 +233,9 @@ body {
 
 /* Categories row wrapper */
 .categories-wrapper {
-  position: sticky;
-  top: 56px;
-  left: 72px; /* offset for small sidebar */
-  right: 0;
-  height: 48px;
-  background: #fff;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  z-index: 900;
-  overflow: hidden;
+  overflow-x: hidden; /* ✅ keeps scroll arrows working but doesn’t hide chips */
 }
+
 
 .categories {
   display: flex;
