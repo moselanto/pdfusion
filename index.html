@@ -216,6 +216,10 @@ body {
 .drawer a:hover {
   background: #f2f2f2;
 }
+/* Content shifts when drawer is open */
+.content {
+  margin-top: 10px; /* only accounts for topbar */
+}
 
 .content.shifted {
   margin-left: 240px; /* match drawer width */
@@ -273,13 +277,11 @@ body {
 }
 
 /* Default content layout (below only the topbar) */
-margin-top: 104px; /* 56px topbar + 48px categories */
-      margin-left: 72px;
-      padding: 16px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
+.content {
+  margin-top: 10px;   /* just the topbar height */
+  margin-left: 72px;  /* account for compact sidebar */
+  padding: 16px;
+}
 
 /* When categories bar is present */
 .categories-wrapper + .content {
