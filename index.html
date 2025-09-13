@@ -131,6 +131,37 @@ body {
   color: #606060;
 }
 
+    /* Scroll arrows */
+.scroll-btn {
+  background: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #606060;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+}
+
+.scroll-btn.left {
+  left: 0;
+}
+
+.scroll-btn.right {
+  right: 0;
+}
+
+.scroll-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+
 /* Expandable drawer (big nav) */
 /* Drawer */
 .drawer {
@@ -396,26 +427,31 @@ body {
 
   <!-- Categories -->
   <div class="categories-wrapper">
-    <div class="categories" id="categories">
-      <div class="chip active">All</div>
-      <div class="chip">Music</div>
-      <div class="chip">African Music</div>
-      <div class="chip">Playlists</div>
-      <div class="chip">Mixes</div>
-      <div class="chip">Riddim</div>
-      <div class="chip">Live</div>
-      <div class="chip">Podcasts</div>
-      <div class="chip">Dr. Dre</div>
-      <div class="chip">Web pages</div>
-      <div class="chip">New-Age Music</div>
-      <div class="chip">Contemporary Worship Music</div>
-      <div class="chip">Comedy</div>
-      <div class="chip">Animated films</div>
-      <div class="chip">Recently uploaded</div>
-      <div class="chip">Watched</div>
-      <div class="chip">New to you</div>
-    </div>
+  <button class="scroll-btn left" id="scrollLeft">◀</button>
+  
+  <div class="categories" id="categories">
+    <div class="chip active">All</div>
+    <div class="chip">Music</div>
+    <div class="chip">African Music</div>
+    <div class="chip">Playlists</div>
+    <div class="chip">Mixes</div>
+    <div class="chip">Riddim</div>
+    <div class="chip">Live</div>
+    <div class="chip">Podcasts</div>
+    <div class="chip">Dr. Dre</div>
+    <div class="chip">Web pages</div>
+    <div class="chip">New-Age Music</div>
+    <div class="chip">Contemporary Worship Music</div>
+    <div class="chip">Comedy</div>
+    <div class="chip">Animated films</div>
+    <div class="chip">Recently uploaded</div>
+    <div class="chip">Watched</div>
+    <div class="chip">New to you</div>
   </div>
+  
+  <button class="scroll-btn right" id="scrollRight">▶</button>
+</div>
+
 
    <!-- Content (video grid etc.) -->
   <div class="content">
@@ -424,6 +460,54 @@ body {
     </div>
   </div>
 
+
+<script>
+  // Highlight clicked category
+  const chips = document.querySelectorAll(".chip");
+  chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      document.querySelector(".chip.active")?.classList.remove("active");
+      chip.classList.add("active");
+    });
+  });
+
+  // Scroll arrows with auto-hide
+  const categories = document.getElementById("categories");
+  const scrollLeftBtn = document.getElementById("scrollLeft");
+  const scrollRightBtn = document.getElementById("scrollRight");
+
+  function updateArrows() {
+    // At left edge
+    if (categories.scrollLeft <= 0) {
+      scrollLeftBtn.style.display = "none";
+    } else {
+      scrollLeftBtn.style.display = "flex";
+    }
+
+    // At right edge
+    if (categories.scrollLeft + categories.clientWidth >= categories.scrollWidth - 1) {
+      scrollRightBtn.style.display = "none";
+    } else {
+      scrollRightBtn.style.display = "flex";
+    }
+  }
+
+  scrollLeftBtn.addEventListener("click", () => {
+    categories.scrollBy({ left: -200, behavior: "smooth" });
+  });
+
+  scrollRightBtn.addEventListener("click", () => {
+    categories.scrollBy({ left: 200, behavior: "smooth" });
+  });
+
+  categories.addEventListener("scroll", updateArrows);
+  window.addEventListener("resize", updateArrows);
+
+  // Run once on load
+  updateArrows();
+</script>
+
+  
   <!-- ✅ JavaScript at bottom -->
  <script>
   const menuBtn = document.getElementById("menuBtn");
